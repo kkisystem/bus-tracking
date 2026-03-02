@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f58220">
+
+  <meta charset="UTF-8">
+  <title>Live Bus Location</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+</head>
+
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <img src="logo.png" class="logo">
+
+    <div class="lang-buttons">
+      <button onclick="setLang('en')">English</button>
+      <button onclick="setLang('ar')">Arabic</button>
+    </div>
+
+    <h1 id="busTitle">Live Bus Location</h1>
+
+    <button onclick="window.location.href='dashboard.html'"
+      data-en="Back"
+      data-ar="العودة">
+      Back
+    </button>
+  </aside>
+
+  <main class="main" style="padding:20px;">
+
+    <div
+      id="map"
+      style="
+        width:100%;
+        max-width:1100px;
+        height:650px;
+        margin:0 auto;
+        border-radius:20px;
+        border:2px dashed #999;
+        background:#f9f9f9;
+      "
+    >
+      <p data-en="Live map will appear here"
+         data-ar="سيظهر الموقع المباشر هنا">
+        Live map will appear here
+      </p>
+    </div>
+
+  </main>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<!-- Existing JS (UNCHANGED) -->
+<script src="script.js"></script>
+
+<!-- Auth protection (UNCHANGED) -->
+<script>
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      window.location.href = "index.html";
+    }
+  });
+</script>
+
+<!-- Bus title (UNCHANGED) -->
+<script>
+  const bus = localStorage.getItem("selectedBus");
+  if (bus) {
+    document.getElementById("busTitle").textContent =
+      bus + " – Live Location";
+  }
+</script>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- ✅ UPDATED MAP CODE FOR YOUR FIREBASE -->
+<script>
+  // remove placeholder text
+  document.querySelector("#map p")?.remove();
+
+  // get selected bus
+  const selectedBus = localStorage.getItem("selectedBus");
+
+  // map bus name → firebase key (matches exact Firebase capitalization)
+  const busKey =
+    selectedBus === "Bus 1" ? "Bus1" :
+    selectedBus === "Bus 2" ? "Bus2" :
+    null;
+
+  if (!busKey) {
+    alert("No bus selected");
+  }
+
+  // create map **START AT REAL BUS COORDINATES**
+  const map = L.map("map").setView([21.59280, 39.18032], 16);
+
+  // ✅ ADD THIS (YOU WERE MISSING IT)
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+  }).addTo(map);
+
+  // marker
+  const marker = L.marker([21.59280, 39.18032]).addTo(map);
+
+  // 🔥 LISTEN TO FIREBASE (matches your Firebase)
+  firebase.database()
+    .ref("Buslocation/" + busKey)
+    .on("value", snapshot => {
+      const data = snapshot.val();
+      if (!data || data.lat === undefined || data.lng === undefined) return;
+
+      const lat = data.lat;
+      const lng = data.lng;
+
+      marker.setLatLng([lat, lng]);
+      map.setView([lat, lng], 16);
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

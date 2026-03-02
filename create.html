@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f58220">
+
+<meta charset="UTF-8">
+<title>Create Account</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <img src="logo.png" class="logo">
+
+  <div class="lang-buttons">
+    <button type="button" onclick="setLang('en')">English</button>
+    <button type="button" onclick="setLang('ar')">Arabic</button>
+  </div>
+
+  <h1 data-en="Create Account" data-ar="إنشاء حساب">Create Account</h1>
+</aside>
+
+<main class="main">
+  <div class="card">
+
+    <h2 data-en="Create Account" data-ar="إنشاء حساب">Create Account</h2>
+
+    <!-- ✅ ONE error element -->
+    <p id="error" class="error"></p>
+
+    <input id="registerPhone"
+      placeholder="Phone number"
+      data-en-placeholder="Phone number"
+      data-ar-placeholder="رقم الهاتف">
+
+    <input id="registerPassword" type="password"
+      placeholder="Password"
+      data-en-placeholder="Password"
+      data-ar-placeholder="كلمة المرور">
+
+    <input id="registerConfirm" type="password"
+      placeholder="Confirm password"
+      data-en-placeholder="Confirm password"
+      data-ar-placeholder="تأكيد كلمة المرور">
+
+    <button type="button" onclick="register()"
+      data-en="Create Account"
+      data-ar="إنشاء حساب">
+      Create Account
+    </button>
+
+    <p class="link">
+      <a href="index.html"
+        data-en="Back to login"
+        data-ar="العودة لتسجيل الدخول">
+        Back to login
+      </a>
+    </p>
+
+  </div>
+</main>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

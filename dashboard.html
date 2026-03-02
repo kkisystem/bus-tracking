@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f58220">
+
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <img src="logo.png" class="logo">
+
+    <div class="lang-buttons">
+      <button type="button" onclick="setLang('en')">English</button>
+      <button type="button" onclick="setLang('ar')">Arabic</button>
+    </div>
+
+    <h1 data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</h1>
+
+    <button type="button" onclick="logout()" data-en="Logout" data-ar="تسجيل الخروج">
+      Logout
+    </button>
+  </aside>
+
+  <main class="main">
+
+    <div class="card" style="text-align:center;">
+      <h2 data-en="Available Buses" data-ar="الحافلات المتاحة">
+        Available Buses
+      </h2>
+
+      <!-- BUS 1 -->
+      <button
+        onclick="openMap('Bus 1')"
+        style="
+          background:#ff8c00;
+          color:white;
+          border:none;
+          padding:14px 30px;
+          font-size:18px;
+          border-radius:10px;
+          cursor:pointer;
+          margin-top:20px;
+          margin-right:10px;
+        "
+        data-en="Bus 1"
+        data-ar="الحافلة 1"
+      >
+        Bus 1
+      </button>
+
+      <!-- BUS 2 -->
+      <button
+        onclick="openMap('Bus 2')"
+        style="
+          background:#ff8c00;
+          color:white;
+          border:none;
+          padding:14px 30px;
+          font-size:18px;
+          border-radius:10px;
+          cursor:pointer;
+          margin-top:20px;
+        "
+        data-en="Bus 2"
+        data-ar="الحافلة 2"
+      >
+        Bus 2
+      </button>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="script.js"></script>
+
+<script>
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      window.location.href = "index.html";
+    }
+  });
+</script>
+
+<script>
+  function openMap(busName) {
+    localStorage.setItem("selectedBus", busName);
+    window.location.href = "map.html";
+  }
+</script>
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+}
+
+/* ===== LEFT SIDEBAR ===== */
+.sidebar {
+  width: 300px;
+  background: #143b63;
+  color: white;
+  padding: 30px 20px;
+}
+
+.logo {
+  width: 180px;   /* increase size */
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.sidebar h1 {
+  margin: 10px 0 5px;
+  font-size: 22px;
+}
+
+.sidebar p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.lang-buttons button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ===== RIGHT CONTENT ===== */
+.main {
+  flex: 1;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+.card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.card button {
+  width: 100%;
+  padding: 10px;
+  background: #f58220;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  opacity: 0.9;
+}
+
+.card a {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6a00ff;
+  text-decoration: none;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+/* 🔧 FIX LAYOUT SQUISH */
+.layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 280px;        /* keep it stable */
+  min-width: 280px;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin: 10px 0;
+  min-height: 18px; /* keeps space even when empty */
+}
+
+.how-we-work h3 {
+  font-size: 30px;        /* big title */
+  color: white;
+  margin-bottom: 6px;    /* ⬅ brings desc closer */
+}
+
+.how-we-work p {
+  font-size: 16px;       /* ⬅ smaller description */
+  color: white;
+  line-height: 1.5;
+  margin-top: 0;         /* ⬅ removes extra gap */
+}
+
+.how-we-work h3 {
+  opacity: 0;
+  animation: fadeSlide 1s ease forwards;
+}
+
+.how-we-work p {
+  opacity: 0;
+  animation: fadeSlide 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.how-we-work {
+  animation: none;
+}
+.how-we-work {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeSlide 1.2s ease forwards;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

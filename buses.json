@@ -1,0 +1,12 @@
+{
+  "Buslocation": {
+    "Bus1": {
+      "lat": 0,
+      "lng": 0
+    },
+    "Bus2": {
+      "lat": 0,
+      "lng": 0
+    }
+  }
+}
